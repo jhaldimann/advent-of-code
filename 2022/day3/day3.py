@@ -1,25 +1,17 @@
 def get_duplicate_values():
-    c = [
-        'vJrwpWtwJgWrhcsFMMfFFhFp',
-        'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
-        'PmmdzqPrVvPwwTWBwg',
-        'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
-        'ttgJtRGJQctTZtZT',
-        'CrZsJsPPZsGzwwsLwLmpwMDw'
-    ]
+    c = []
     a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    dl = set()
     res = 0
 
-    for x in c:
-        first_part = x[0:int(len(x)/2)]
-        second_part = x[int(len(x)/2):len(x)]
-        for letter in first_part:
-            if letter in second_part:
-                dl.add(letter)
+    for e in open("data.txt","r").read().split('\n'):
+        c.append(e.split('\n')[0])
 
-    for e in dl:
-        res += a.rfind(e) + 1
+    for x in c:
+        first_part = set(x[0:int(len(x)/2)])
+        second_part = set(x[int(len(x)/2):len(x)])
+
+        for i in first_part.intersection(second_part):
+            res += a.rfind(i) + 1
 
     return res
 

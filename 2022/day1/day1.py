@@ -2,6 +2,7 @@ def get_highest_calorie_elf():
     pos = 0
     calories = [[]]
     sums = []
+    top_three = 0
     for e in open("data.txt","r").read().split('\n'):
         if e == '':
             pos = pos + 1
@@ -12,7 +13,6 @@ def get_highest_calorie_elf():
     for calorie in calories:
         sums.append(sum(calorie))
 
-    return max(sums)
-
-
-print(get_highest_calorie_elf())
+    for x in range(3):
+        top_three += max(sums)
+        sums.remove(max(sums))

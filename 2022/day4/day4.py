@@ -1,20 +1,27 @@
 def get_duplicate_series():
     res = 0
-    for e in open("input.txt","r").read().split('\n'):
+    res2 = 0
+
+    for e in open("data.txt", "r").read().split('\n'):
         first = []
         second = []
-        counter = 0
-        for a in e.split(','):
+        counter = 1
+
+        for a in e.rstrip().split(","):
             counter += 1
             el = a.split('-')
-            numbers = list(range(int(el[0]), int(el[1]) + 1))
+            numbers = set(range(int(el[0]), int(el[1]) + 1))
             if counter % 2 == 0:
-                first = numbers
-            else:
                 second = numbers
+            else:
+                first = numbers
 
-        if str(first).strip('[]') in str(second) or str(second).strip('[]') in str(first):
-            res = res + 1
-    return res
+        if first.issubset(second) or second.issubset(first):
+            res += 1
 
-print(get_duplicate_series())
+        if not first.isdisjoint(second):
+            res2 += 1
+
+    return [res, res2]
+
+print(get_duplicate_series()) #475
