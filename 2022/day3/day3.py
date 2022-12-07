@@ -1,7 +1,9 @@
 def get_duplicate_values():
     c = []
+    d = []
     a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     res = 0
+    res2 = 0
 
     for e in open("data.txt","r").read().split('\n'):
         c.append(e.split('\n')[0])
@@ -13,6 +15,20 @@ def get_duplicate_values():
         for i in first_part.intersection(second_part):
             res += a.rfind(i) + 1
 
-    return res
+
+    d.extend(c[i:i+3] for i in range(0, len(c), 3))
+    for el in d:
+
+        e = set(el[0])
+        f = set(el[1])
+        g = set(el[2])
+
+        for z in e.intersection(f).intersection(g):
+            res2 += a.rfind(z) + 1
+
+    return [res, res2]
 
 print(get_duplicate_values())
+
+
+
