@@ -29,6 +29,3 @@ def get_duplicate_values():
     return [res, res2]
 
 print(get_duplicate_values())
-
-
-
